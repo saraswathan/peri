@@ -1,0 +1,213 @@
+USE [master]
+GO
+/****** Object:  Database [plain_DB]    Script Date: 3/23/2024 1:14:27 PM ******/
+CREATE DATABASE [plain_DB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'plain_DB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\plain_DB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'plain_DB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\plain_DB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [plain_DB] SET COMPATIBILITY_LEVEL = 160
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [plain_DB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [plain_DB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [plain_DB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [plain_DB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [plain_DB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [plain_DB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [plain_DB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [plain_DB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [plain_DB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [plain_DB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [plain_DB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [plain_DB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [plain_DB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [plain_DB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [plain_DB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [plain_DB] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [plain_DB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [plain_DB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [plain_DB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [plain_DB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [plain_DB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [plain_DB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [plain_DB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [plain_DB] SET RECOVERY FULL 
+GO
+ALTER DATABASE [plain_DB] SET  MULTI_USER 
+GO
+ALTER DATABASE [plain_DB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [plain_DB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [plain_DB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [plain_DB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [plain_DB] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [plain_DB] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'plain_DB', N'ON'
+GO
+ALTER DATABASE [plain_DB] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [plain_DB] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [plain_DB]
+GO
+/****** Object:  Table [dbo].[BOOKING_DETAILS]    Script Date: 3/23/2024 1:14:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BOOKING_DETAILS](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SeatNo] [int] NULL,
+	[SeatType] [nvarchar](10) NULL,
+	[Amount] [nvarchar](10) NULL,
+	[Food] [bit] NULL,
+	[CId] [int] NULL,
+	[BookedDate] [datetime] NULL,
+	[CancelDate] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CUSTOMER_DETAILS]    Script Date: 3/23/2024 1:14:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CUSTOMER_DETAILS](
+	[CId] [int] IDENTITY(1,1) NOT NULL,
+	[Customer_Name] [nvarchar](20) NULL,
+	[CreatedDate] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[CId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[BOOKING_DETAILS] ON 
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (1, 1, N'BS', N'500', 1, 1, CAST(N'2024-03-06T12:37:19.083' AS DateTime), NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (2, 2, N'BS', N'500', 1, 2, CAST(N'2024-03-06T12:37:25.950' AS DateTime), NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (3, 3, N'BS', N'5100', 1, 3, CAST(N'2024-03-06T15:24:40.373' AS DateTime), NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (4, 4, N'BS', N'5200', 1, 9, CAST(N'2024-03-06T15:34:35.907' AS DateTime), NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (5, 5, N'BS', N'5200', 0, 10, CAST(N'2024-03-06T15:34:35.927' AS DateTime), NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (6, 6, N'BS', N'5100', 1, 4, CAST(N'2024-03-06T15:24:43.647' AS DateTime), NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (7, 7, N'BS', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (8, 8, N'BS', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (9, 9, N'BS', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (10, 10, N'BS', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (11, 11, N'BS', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (12, 12, N'BS', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (13, 1, N'ES', N'2500', 1, 5, CAST(N'2024-03-06T15:28:36.787' AS DateTime), NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (14, 2, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (15, 3, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (16, 4, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (17, 5, N'ES', N'2550', 1, 7, CAST(N'2024-03-06T15:30:04.850' AS DateTime), NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (18, 6, N'ES', N'2575', 1, 8, CAST(N'2024-03-06T15:33:07.573' AS DateTime), NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (19, 7, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (20, 8, N'ES', N'2500', 0, 6, CAST(N'2024-03-06T15:28:39.137' AS DateTime), NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (21, 9, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (22, 10, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (23, 11, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (24, 12, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (25, 13, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (26, 14, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (27, 15, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (28, 16, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (29, 17, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[BOOKING_DETAILS] ([Id], [SeatNo], [SeatType], [Amount], [Food], [CId], [BookedDate], [CancelDate]) VALUES (30, 18, N'ES', NULL, NULL, NULL, NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[BOOKING_DETAILS] OFF
+GO
+SET IDENTITY_INSERT [dbo].[CUSTOMER_DETAILS] ON 
+GO
+INSERT [dbo].[CUSTOMER_DETAILS] ([CId], [Customer_Name], [CreatedDate]) VALUES (1, N'PPS', CAST(N'2024-03-06T12:37:17.830' AS DateTime))
+GO
+INSERT [dbo].[CUSTOMER_DETAILS] ([CId], [Customer_Name], [CreatedDate]) VALUES (2, N'Sarasu', CAST(N'2024-03-06T12:37:24.623' AS DateTime))
+GO
+INSERT [dbo].[CUSTOMER_DETAILS] ([CId], [Customer_Name], [CreatedDate]) VALUES (3, N'Periyasamy', CAST(N'2024-03-06T15:24:40.170' AS DateTime))
+GO
+INSERT [dbo].[CUSTOMER_DETAILS] ([CId], [Customer_Name], [CreatedDate]) VALUES (4, N'saraswathan', CAST(N'2024-03-06T15:24:43.637' AS DateTime))
+GO
+INSERT [dbo].[CUSTOMER_DETAILS] ([CId], [Customer_Name], [CreatedDate]) VALUES (5, N'Vettri', CAST(N'2024-03-06T15:28:36.610' AS DateTime))
+GO
+INSERT [dbo].[CUSTOMER_DETAILS] ([CId], [Customer_Name], [CreatedDate]) VALUES (6, N'Kani', CAST(N'2024-03-06T15:28:39.130' AS DateTime))
+GO
+INSERT [dbo].[CUSTOMER_DETAILS] ([CId], [Customer_Name], [CreatedDate]) VALUES (7, N'Gokul', CAST(N'2024-03-06T15:30:04.840' AS DateTime))
+GO
+INSERT [dbo].[CUSTOMER_DETAILS] ([CId], [Customer_Name], [CreatedDate]) VALUES (8, N'Kiruba', CAST(N'2024-03-06T15:33:07.567' AS DateTime))
+GO
+INSERT [dbo].[CUSTOMER_DETAILS] ([CId], [Customer_Name], [CreatedDate]) VALUES (9, N'Kaniraj', CAST(N'2024-03-06T15:34:35.897' AS DateTime))
+GO
+INSERT [dbo].[CUSTOMER_DETAILS] ([CId], [Customer_Name], [CreatedDate]) VALUES (10, N'Jon', CAST(N'2024-03-06T15:34:35.920' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[CUSTOMER_DETAILS] OFF
+GO
+USE [master]
+GO
+ALTER DATABASE [plain_DB] SET  READ_WRITE 
+GO
